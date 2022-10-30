@@ -33,6 +33,3 @@ public class witchstev {
     }
 
 }
-    git remote add origin git@github.com:SteveHuNZ/Java.git
-        git branch -M main
-        git push -u origin main
