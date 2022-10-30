@@ -1,6 +1,6 @@
 package Forloop;
 
-public class Forloop1 {
+public class Forloop1_Odd_sum {
     public static void main(String[] args) {
 //        int sum= 0;
 //        for (int i = 1; i <= 5; i++) {
@@ -25,4 +25,3 @@ public class Forloop1 {
         System.out.println(" the sum of odd from 1-10 is :"+ sum);
     }
 }
-
