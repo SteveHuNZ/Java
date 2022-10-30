@@ -25,5 +25,14 @@ public class witchstev {
 
 
         }
+
+        System.out.println("--------");
+        for(int i=0 ;i<3; i++){
+            System.out.println("william is gonging to camp");
+        }
     }
+
 }
+    git remote add origin git@github.com:SteveHuNZ/Java.git
+        git branch -M main
+        git push -u origin main
