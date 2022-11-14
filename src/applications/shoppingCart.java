@@ -28,7 +28,7 @@ public class shoppingCart {
                    break;
 
                case"update":
-                   updateGoods(shoppingCart);
+                   updateGoods(shoppingCart,sc);
                    break;
 
                case "pay":
@@ -45,17 +45,41 @@ public class shoppingCart {
 
     }
 
-    private static void pay(Goods[] shoppingCart) {
+    public static void pay(Goods[] shoppingCart) {
     }
 
-    private static void updateGoods(Goods[] shoppingCart) {
+   public  static void updateGoods(Goods[] shoppingCart , Scanner sc ) {
+       //require customer enter the item id which they want to require,
+       // depends on this id , search the object which we want to change.
+       while (true) {
+           System.out.println("please enter item id which you want to to modify ");
+           int id = sc.nextInt();
+           Goods g = getGoodsById(shoppingCart,id);
+           if (g == null){
+               System.out.println("you haven't buy this item ");
+           }else {
+               System.out.println("please enter :" + g.name + "'s new quantity:");
+               int buyNumber = sc.nextInt();
+               g.buyNumber = buyNumber;
+               System.out.println("modify completed ");
+               queryGoods(shoppingCart);
+               break;
+
+           }
+
+       }
+   }
+    public static Goods getGoodsById(Goods[] shoppingCart,int id ){
+        //traversal the array to find the item
+        for (int i = 0; i < shoppingCart.length; i++) {
+        Goods g  = shoppingCart[i];
+        if (g.id ==id){return g ;
+        }else {return null;}
     }
-
-
-
-
+    return null;
+    }
 // query information and then displaying.
-    private static void queryGoods(Goods[] shoppingCart) {
+    public static void queryGoods(Goods[] shoppingCart) {
 
         System.out.println("=========queried information as blow============");
         System.out.println("number\t\tname\t\tprice\t\tquantity");
@@ -69,7 +93,7 @@ public class shoppingCart {
         }
     }
 
-    private static void addGoods(Goods[] shoppingCart,Scanner sc) {
+    public static void addGoods(Goods[] shoppingCart,Scanner sc) {
         // enter users purchase information
         System.out.println("please enter the goods number, no repeating:");
         int id = sc.nextInt();

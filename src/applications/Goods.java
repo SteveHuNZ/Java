@@ -1,8 +1,8 @@
 package applications;
 
-public class goods {
+public class Goods {
     int id;
-    string name;
+    String name;
     double price;
     int buyNumber;
 
