@@ -46,6 +46,16 @@ public class shoppingCart {
     }
 
     public static void pay(Goods[] shoppingCart) {
+        queryGoods(shoppingCart);
+        double money = 0;
+        for (int i = 0; i < shoppingCart.length; i++) {
+            Goods g  = shoppingCart[i];
+            if (g != null){
+                money += (g.price *g.buyNumber);
+            }else {break;}
+            
+        }
+        System.out.println("the totally price is :"+ money);
     }
 
    public  static void updateGoods(Goods[] shoppingCart , Scanner sc ) {
