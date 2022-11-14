@@ -51,7 +51,7 @@ public class shoppingCart {
         for (int i = 0; i < shoppingCart.length; i++) {
             Goods g  = shoppingCart[i];
             if (g != null){
-                money += (g.price *g.buyNumber);
+                money += (g.getPrice() *g.getBuyNumber());
             }else {break;}
             
         }
@@ -68,9 +68,9 @@ public class shoppingCart {
            if (g == null){
                System.out.println("you haven't buy this item ");
            }else {
-               System.out.println("please enter :" + g.name + "'s new quantity:");
+               System.out.println("please enter :" + g.getName() + "'s new quantity:");
                int buyNumber = sc.nextInt();
-               g.buyNumber = buyNumber;
+               g.setBuyNumber(buyNumber);
                System.out.println("modify completed ");
                queryGoods(shoppingCart);
                break;
@@ -83,7 +83,7 @@ public class shoppingCart {
         //traversal the array to find the item
         for (int i = 0; i < shoppingCart.length; i++) {
         Goods g  = shoppingCart[i];
-        if (g.id ==id){return g ;
+        if (g.getId() ==id){return g ;
         }else {return null;}
     }
     return null;
@@ -96,7 +96,7 @@ public class shoppingCart {
         for (int i = 0; i < shoppingCart.length; i++) {
             Goods g = shoppingCart[i];
             if(g != null){
-                System.out.println(g.id + "\t\t" +g.name + "\t\t"+g.price + "\t\t"+ g.buyNumber + "\t\t");
+                System.out.println(g.getId() + "\t\t" +g.getName() + "\t\t"+g.getPrice() + "\t\t"+ g.getBuyNumber() + "\t\t");
 
             }else {break;}
 
@@ -116,10 +116,10 @@ public class shoppingCart {
 
         // turn purchase information into an object
         Goods g  = new Goods();
-        g.id = id ;
-        g.name = name;
-        g.buyNumber = buyNumber;
-        g.price = price;
+        g.setId(id);
+        g.setName(name);
+        g.setBuyNumber(buyNumber);
+        g.setPrice(price);
 
         // 3. put this object into the array of shopping cart (using for loop);
         for (int i = 0; i < shoppingCart.length; i++) {
@@ -129,7 +129,7 @@ public class shoppingCart {
             }
 
         }
-        System.out.println("your item:"+ g.name + " already put in the trolley");
+        System.out.println("your item:"+ g.getName() + " already put in the trolley");
 
 
     }
