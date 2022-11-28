@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+
+
 public class ATMSystem {
     public static void main(String[] args) {
         ArrayList<Account> accounts = new ArrayList<>();
@@ -19,6 +21,7 @@ public class ATMSystem {
             switch(command){
                 case 1:
                     //用户登录//
+                    login(accounts,sc);
                     break;
                 case 2:
                     //用户开户//
@@ -30,6 +33,20 @@ public class ATMSystem {
             }
         }
 
+    }
+
+    /**
+     * 登录功能
+     * @param accounts 全部账户的集合
+     * @param sc 扫描器
+     */
+
+    private static void login(ArrayList<Account> accounts, Scanner sc) {
+        System.out.println("==============系统登录操作===================");
+        if(accounts.size()== 0){
+            System.out.println("sorry, on any account on this system,please sign up firstly");
+            return;
+        }
     }
 
     /**
