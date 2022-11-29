@@ -47,6 +47,32 @@ public class ATMSystem {
             System.out.println("sorry, on any account on this system,please sign up firstly");
             return;
         }
+        //正式进入登录操作
+        while (true) {
+            System.out.println("请您输入登录卡号");
+            String cardId = sc.next();
+            //判断卡号是否存在： 根据卡号去账户集合中查询账户对象
+            Account acc = getAccountByCardId(cardId, accounts);
+            if (acc != null){
+                while (true) {
+                    // the id is included
+                    // let uses to enter password and verify it
+                    System.out.println("please enter password");
+                    String passWord = sc.next();
+                    //judge if the typed password is as same as in the account
+                    if(acc.getPassWord().equals(passWord)){
+                        //login successful
+                        System.out.println("congratulations登录成功, "+ acc.getUserName() +"your card id is :" + acc.getCardId());
+                    }else {
+                        System.out.println("your password is wrong");
+                    }
+                }
+
+
+            }else{
+                System.out.println("sorry , this id is not included in the system");
+            }
+        }
     }
 
     /**
