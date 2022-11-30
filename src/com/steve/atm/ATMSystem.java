@@ -63,6 +63,14 @@ public class ATMSystem {
                     if(acc.getPassWord().equals(passWord)){
                         //login successful
                         System.out.println("congratulations登录成功, "+ acc.getUserName() +"your card id is :" + acc.getCardId());
+                        // operation pages
+                        showUserCommand(sc , acc);
+
+                        return;//展示操作页走完了，干掉登录方法
+
+
+
+
                     }else {
                         System.out.println("your password is wrong");
                     }
@@ -73,6 +81,81 @@ public class ATMSystem {
                 System.out.println("sorry , this id is not included in the system");
             }
         }
+    }
+
+    /**
+     * 展示登陆后的操作页面
+     */
+    private static void showUserCommand(Scanner sc,Account acc ) {
+        while (true) {
+            System.out.println("==================用户操作页面===================");
+            System.out.println("1,查询账户");
+            System.out.println("2，存款");
+            System.out.println("3 取款");
+            System.out.println("4转账");
+            System.out.println("5，修改密码");
+            System.out.println("6 退出");
+            System.out.println("注销账户");
+            System.out.println("请选择");
+            int command = sc.nextInt();
+            switch (command){
+                case 1 :
+                    //1,查询账户
+                    showAccount(acc);
+                    break;
+                case 2 :
+                    //存款"
+                    depositeMondy(acc, sc);
+                    break;
+                case 3 :
+                    //取款"
+                    break;
+                case 4 :
+                    //4转账"
+                    break;
+                case 5 :
+                    //修改密码"
+                    break;
+                case 6 :
+                    //退出"
+                    System.out.println("退出成功");
+                    return;//让当前方法停止执行
+
+                case 7 :
+                    //注销账户
+                    break;
+                default:
+                    System.out.println("您输入的命令不存在 ");
+            }
+        }
+    }
+
+    /**
+     * 存钱
+     * @param acc 当前账户对象
+     * @param sc 扫描器
+     */
+
+    private static void depositeMondy(Account acc, Scanner sc) {
+        System.out.println("============存款信息如下==============");
+        System.out.println("请您输入存款金额");
+        double money = sc.nextDouble();
+        //更新余额 原来的钱加上新存入的钱
+        acc.setMoney(acc.getMoney()+ money);
+        System.out.println("恭喜你，存钱成功，当前账户信息如下：");
+        showAccount(acc);
+    }
+
+    /**
+     * 展示账户信息
+     * @param acc
+     */
+    private static void showAccount(Account acc) {
+        System.out.println("============当前账户信息如下==============");
+        System.out.println("卡号："+ acc.getCardId());
+        System.out.println("户主："+ acc.getUserName());
+        System.out.println("余额："+ acc.getMoney());
+        System.out.println("限额："+ acc.getQuotaMoney());
     }
 
     /**
