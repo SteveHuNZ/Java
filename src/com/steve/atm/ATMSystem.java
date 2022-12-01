@@ -64,7 +64,7 @@ public class ATMSystem {
                         //login successful
                         System.out.println("congratulations登录成功, "+ acc.getUserName() +"your card id is :" + acc.getCardId());
                         // operation pages
-                        showUserCommand(sc , acc);
+                        showUserCommand(sc , acc,accounts);
 
                         return;//展示操作页走完了，干掉登录方法
 
@@ -86,7 +86,7 @@ public class ATMSystem {
     /**
      * 展示登陆后的操作页面
      */
-    private static void showUserCommand(Scanner sc,Account acc ) {
+    private static void showUserCommand(Scanner sc,Account acc ,ArrayList<Account>accounts) {
         while (true) {
             System.out.println("==================用户操作页面===================");
             System.out.println("1,查询账户");
@@ -109,9 +109,11 @@ public class ATMSystem {
                     break;
                 case 3 :
                     //取款"
+                    drawMoney(acc,sc);
                     break;
                 case 4 :
                     //4转账"
+                    transferMoney(sc,acc,accounts);
                     break;
                 case 5 :
                     //修改密码"
@@ -128,6 +130,68 @@ public class ATMSystem {
                     System.out.println("您输入的命令不存在 ");
             }
         }
+    }
+
+    /**
+     *  转账功能
+     * @param sc 扫描器
+     * @param acc 自己账户
+     * @param accounts 当前账户的集合
+     */
+    private static void transferMoney(Scanner sc, Account acc, ArrayList<Account> accounts) {
+        System.out.println("============用户取钱操作==============");
+        //判断是否有2哥账户
+        if(accounts.size() < 2){
+            System.out.println("当前系统中不足2个账户， 不能进行转装， 请先开户");
+            return;
+        }
+        //判断自己的账户是否有钱
+        if (acc.getMoney() == 0){
+            System.out.println("您自己都没有钱， 就别转账了"
+
+            );
+            return;
+
+        }
+    }
+
+    /**
+     * 取钱
+     * @param acc 当前账户对象
+     * @param sc 扫描器
+     */
+    private static void drawMoney(Account acc, Scanner sc) {
+        System.out.println("============用户取钱操作==============");
+        // 1, 判断是否住够100元
+        if (acc.getMoney() < 100){
+            System.out.println("金额不足100元， 无法取钱");
+            return;
+        }
+        while (true) {
+            // 提示用户输入取钱金额
+            System.out.println("请输入取钱金额");
+            double money = sc.nextDouble();
+            // 3, 判断这个金额是否满足要求
+            if(money > acc.getQuotaMoney()){
+                System.out.println("对不起， 您的取款金额超过了限额，每次最多可以取" + acc.getQuotaMoney());
+            }else{
+                //没有超过当此限额的情况下
+                //判断是否超过了账户的余额
+                if (money > acc.getMoney()){
+                    System.out.println("余额不足，您的余额是："+ acc.getMoney());
+                }else {
+                    //可以取钱了
+                    System.out.println("恭喜您取钱"+ money +"元，成功！");
+                    //更新余额
+                    acc.setMoney(acc.getMoney()-money);
+                    //取钱结束
+                    showAccount(acc);
+                    return;
+                }
+
+            }
+        }
+
     }
 
     /**
