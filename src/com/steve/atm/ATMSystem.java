@@ -153,6 +153,27 @@ public class ATMSystem {
             return;
 
         }
+        while (true) {
+            //真正开始转账
+            System.out.println("请输入对方账户的卡号");
+            String cardId = sc.next();
+            //这个卡号不能是自己的卡号
+            if(cardId.equals(acc.getCardId())){
+                System.out.println("对不起，您不可以给自己转账");
+                continue;
+            }
+            //判断这个卡号是否存在，根据这个卡号去查询对方的账户对象
+            Account account = getAccountByCardId(cardId,accounts);
+            if (account == null){
+                System.out.println("对不起， 您输入的卡号不存在");
+            }else {
+                // 这个账户存在， 继续验证他的姓氏
+                String userName = account.getUserName();
+                String tip = "*"+ userName.substring(1);
+                System.out.println("请您输入["+ tip + "]的姓氏");
+            }
+        }
+
     }
 
     /**
