@@ -171,6 +171,29 @@ public class ATMSystem {
                 String userName = account.getUserName();
                 String tip = "*"+ userName.substring(1);
                 System.out.println("请您输入["+ tip + "]的姓氏");
+                String  preName = sc.next();
+
+                //认证姓氏是否通过
+                if (userName.StartsWith(preName)){
+                    while (true) {
+                        //认证沟通过开始转账
+                        System.out.println("请输入转账金额");
+                        double money = sc.nextDouble();
+                        //判读余额是否足够
+                        if(money > acc.getMoney()){
+                            System.out.println("您余额不足，最多可以转账" + acc.getMoney());
+                        } else {
+                            //开始转账
+                            acc.setMoney(acc.getMoney() - money);
+                            account.setMoney(account.getMoney()+ money);
+                            System.out.println("转账成功！您的账户还剩余："+ acc.getMoney());
+                            return;//干掉转账方法
+                        }
+                    }
+                }else{
+
+                    System.out.println(" sorry, family name is not right");
+                }
             }
         }
 
