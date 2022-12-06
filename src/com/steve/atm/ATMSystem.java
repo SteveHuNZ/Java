@@ -117,7 +117,8 @@ public class ATMSystem {
                     break;
                 case 5 :
                     //修改密码"
-                    break;
+                    updatePassword (acc , sc );
+                return;
                 case 6 :
                     //退出"
                     System.out.println("退出成功");
@@ -125,9 +126,58 @@ public class ATMSystem {
 
                 case 7 :
                     //注销账户
+                    System.out.println("are you really want to close your account ? y/n");
+                    String rs = sc.next();
+                    switch (rs){
+                        case"y":
+                            accounts.remove(acc);
+                            System.out.println("rewrite account successed ");
+                            break;
+                        default:
+                    }
+
                     break;
                 default:
                     System.out.println("您输入的命令不存在 ");
+            }
+        }
+    }
+
+    /**
+     * 修改密码
+     * @param acc 当前账户
+     * @param sc 扫描器
+     */
+    private static void updatePassword(Account acc, Scanner sc) {
+        System.out.println("========修改密码功能==========");
+        while (true) {
+            System.out.println("请输入当前密码");
+            String passWord = sc.next();
+            //判断这个密码是否正确
+            if (acc.getPassWord().equals(passWord)){
+                while (true) {
+                    //password is right
+                    //type new password
+                    System.out.println(" please enter new password  ");
+                    String newPassWord = sc.next();
+
+                    System.out.println(" please enter new password again ");
+                    String okPassWord = sc.next();
+                    if (newPassWord.equals(okPassWord)){
+                        //2次密码输入一致， 可以更改密码
+                        acc.setPassWord(newPassWord);
+                        System.out.println(" congratulations , password reset successfully");
+                        return;
+
+                    }else{
+                        System.out.println(" passwords not match");
+
+                    }
+                }
+
+
+            }else {
+                System.out.println(" your passWord is not right");
             }
         }
     }
