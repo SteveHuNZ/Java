@@ -16,8 +16,3 @@ public class Student {
         s.study();
     }
 }
-public static void start(android.content.Context context) {
-    android.content.Intent starter = new Intent(context, Student.class);
-    starter.putExtra();
-    context.startActivity(starter);
-}
