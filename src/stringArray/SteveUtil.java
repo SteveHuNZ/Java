@@ -3,6 +3,7 @@ package stringArray;
 import java.util.Random;
 
 public class SteveUtil {
+    private SteveUtil(){};
     public static String createVerifyCode (int n ){
         String code = " ";
         String data = "abcdefjhijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
