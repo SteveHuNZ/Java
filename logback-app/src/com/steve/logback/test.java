@@ -11,7 +11,7 @@ public class test {
     // 创建log back的日志对象， 代表日志技术
         public static final Logger LOGGER = LoggerFactory.getLogger("Test.class");
     public static void main(String[] args) {
-        try {
+        while(true){try {
             LOGGER.debug("MAIN方法开始执行了");
             LOGGER.info("做除法");
             int a = 10;
@@ -20,9 +20,10 @@ public class test {
             LOGGER.trace("b="+b);
             System.out.println(a/b);
         } catch (Exception e) {
-           e.printStackTrace();
-           LOGGER.error("功能出现异常"+ e);
-        }
+            e.printStackTrace();
+            LOGGER.error("功能出现异常"+ e);
+        }}
+
 
 
     }
