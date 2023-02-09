@@ -6,6 +6,7 @@ import com.steve.bean.Customer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 
 public class MovieSystem {
     /**
@@ -15,6 +16,7 @@ public class MovieSystem {
     public static final List<User> ALL_USERS = new ArrayList<>();
     //store  all the business and movie information
     public static Map<Business, List<Movie>> ALL_MOVIES =  new HashMap<>();
+    public static final Scanner SYS_SC = new Scanner(System.in);
 
     /**
      * prepare some test data
@@ -80,6 +82,23 @@ public class MovieSystem {
         System.out.println("1登录");
         System.out.println("2用户注册");
         System.out.println("3商家注册");
-        System.out.println("请输入操作命令");
+        while (true) {
+            System.out.println("请输入操作命令");
+            String command = SYS_SC.nextLine();
+            switch(command){
+                case "1":
+                    login();
+                    break;
+                case "2":
+                    break;
+                case "3":
+                    break;
+                default:
+                    System.out.println("command is wrong , please enter a proper one");
+            }
+        }
+    }
+
+    private static void login() {
     }
 }
