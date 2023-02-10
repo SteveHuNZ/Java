@@ -17,6 +17,8 @@ public class MovieSystem {
     //store  all the business and movie information
     public static Map<Business, List<Movie>> ALL_MOVIES =  new HashMap<>();
     public static final Scanner SYS_SC = new Scanner(System.in);
+    //定义一个静态的User类的变量，记住当前登录成功的客户对象
+    public static User loginUser;
 
     /**
      * prepare some test data
@@ -78,11 +80,12 @@ public class MovieSystem {
      */
 
     private static void showMain() {
+        while (true) {
         System.out.println("================William 电影首页========================");
         System.out.println("1登录");
         System.out.println("2用户注册");
         System.out.println("3商家注册");
-        while (true) {
+
             System.out.println("请输入操作命令");
             String command = SYS_SC.nextLine();
             switch(command){
@@ -100,5 +103,132 @@ public class MovieSystem {
     }
 
     private static void login() {
+        while (true) {
+            System.out.println("请输入登录名称");
+            String loginName = SYS_SC.nextLine();
+            System.out.println("请输入登录密码");
+            String passWord = SYS_SC.nextLine();
+            //根据用户名查询用户对象
+            User u = getUserByLoginName(loginName);
+            if (u != null){
+                //比对密码是否正确
+                if (u.getPassWord().equals(passWord)){
+                    //登录成功
+                    loginUser = u;//记住登录成功的用户
+                    //判断是用户还是商家登录
+                    if(u instanceof Customer){
+                        //当前登录是普通客户
+                        showCustomerMain();
+
+                    }else {
+                        showBusinessMain();
+                        //当前登录是用户
+                    }
+                    return;
+                }else {
+                    System.out.println("密码有误");
+
+                }
+
+
+            }else {
+                System.out.println("登录名错误，请确认");
+            }
+        }
+    }
+
+    /**
+     * 商家页面操作
+     */
+    private static void showBusinessMain() {
+        while (true) {
+            System.out.println("============黑马电影商家界面===================");
+            System.out.println(loginUser.getUserName() + (loginUser.getSex()=='男'? "先生":"女士" + "欢迎您进入系统"));
+            System.out.println("1、展示详情:");
+            System.out.println("2、上架电影:");
+            System.out.println("3、下架电影:");
+            System.out.println("4、修改电影:");
+            System.out.println("5、退出:");
+
+            System.out.println("请输入您要操作的命令：");
+            String command = SYS_SC.nextLine();
+            switch (command){
+                case "1":
+                    // 展示全部排片信息
+                    showBusinessInfos();
+                    break;
+                case "2":
+                    // 上架电影信息
+                    addMovie();
+                    break;
+                case "3":
+                    // 下架电影信息
+                    deleteMovie();
+                    break;
+                case "4":
+                    // 修改电影信息
+                    updateMovie();
+                    break;
+                case "5":
+                    System.out.println(loginUser.getUserName() +"请您下次再来啊~~~");
+                    return; // 干掉方法
+                default:
+                    System.out.println("不存在该命令！！");
+                    break;
+            }
+        }
+    }
+
+    /**
+     * 用户操作界面
+     */
+    private static void showCustomerMain() {
+        while (true) {
+            System.out.println("============黑马电影客户界面===================");
+            System.out.println(loginUser.getUserName() + (loginUser.getSex()=='男'? "先生":"女士" + "欢迎您进入系统" +
+                    "\t余额：" + loginUser.getMoney()));
+            System.out.println("请您选择要操作的功能：");
+            System.out.println("1、展示全部影片信息功能:");
+            System.out.println("2、根据电影名称查询电影信息:");
+            System.out.println("3、评分功能:");
+            System.out.println("4、购票功能:");
+            System.out.println("5、退出系统:");
+            System.out.println("请输入您要操作的命令：");
+            String command = SYS_SC.nextLine();
+            switch (command){
+                case "1":
+                    // 展示全部排片信息
+                    showAllMovies();
+                    break;
+                case "2":
+                    break;
+                case "3":
+                    // 评分功能
+                    scoreMovie();
+                    showAllMovies();
+                    break;
+                case "4":
+                    // 购票功能
+                    buyMovie();
+                    break;
+                case "5":
+                    return; // 干掉方法
+                default:
+                    System.out.println("不存在该命令！！");
+                    break;
+            }
+        }
+    }
+
+    public static User getUserByLoginName(String loginName){
+        for (User user : ALL_USERS) {
+            //判断这个用户的登录名称是否是我们想要的
+            if(user.getLoginName().equals(loginName)){
+                return user;
+            }
+
+            
+        }
+        return null;
     }
 }
