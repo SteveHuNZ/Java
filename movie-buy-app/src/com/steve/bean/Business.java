@@ -1,6 +1,6 @@
 package com.steve.bean;
 
-public class Business extends User{
+public class Business extends  User{
     private  String shopName;
     private  String address;
 

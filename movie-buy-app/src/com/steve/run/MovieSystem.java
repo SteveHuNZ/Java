@@ -122,7 +122,7 @@ public class MovieSystem {
 
                     }else {
                         showBusinessMain();
-                        //当前登录是用户
+                        //当前登录是商家用户
                     }
                     return;
                 }else {
